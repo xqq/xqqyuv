@@ -18,7 +18,7 @@ For industry use, please consider [libyuv](https://code.google.com/p/libyuv/).
 - Other platforms: e.g. ARM NEON
 
 ### xqqyuv_player
-- Simple demo for xqqyuv. It play YUV file which is outputed from vlc.
+- Simple demo for xqqyuv. It can play YUV file which is outputed from vlc.
 
 - Render: SDL
 
