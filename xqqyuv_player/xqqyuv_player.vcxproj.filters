@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{aa6a2845-7c30-4b3f-b81a-c8a7a9ad2bab}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="vlc_yuv_reader.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="yuvplayer.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="clock.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="vlc_yuv_reader.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="yuvplayer.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="clock.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="assembly.hpp" />
+  </ItemGroup>
+</Project>

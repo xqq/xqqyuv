@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{afc75bdb-a444-4bc7-9952-21fbb9b4b1ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="yuv2rgb.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="xqqyuv.h" />
+    <ClInclude Include="xqqyuv_def.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="rgb2yuv.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="yuv2rgb.cc">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="rgb2yuv.cc">
+      <Filter>source</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
