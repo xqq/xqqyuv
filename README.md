@@ -25,5 +25,6 @@ Render: SDL
 Usage: xqqyuv_player [FILE] [FRAMERATE]
 
 ### License
-    Copyright (C) 2014 zheng qian <xqq@0ginr.com>
-    Licensed under the <a href="http://en.wikipedia.org/wiki/WTFPL">WTFPL</a>, Version 2.0 (the "License");
+Copyright (C) 2014 zheng qian <xqq@0ginr.com>
+
+Licensed under the [WTFPL](http://en.wikipedia.org/wiki/WTFPL), Version 2.0 (the "License");
