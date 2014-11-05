@@ -5,7 +5,7 @@ Simple YUV<->RGB conversion library with SIMD accelerated, still under developin
 For industry use, please consider [libyuv](https://code.google.com/p/libyuv/).
 
 ### Features
-- SSE2 accerated conversion in I420ToARGB
+- SSE2 accelerated conversion in I420ToARGB
 
 ### TODO
 - gcc support (makefile / AT&T inline-asm)
@@ -18,11 +18,11 @@ For industry use, please consider [libyuv](https://code.google.com/p/libyuv/).
 - Other platforms: e.g. ARM NEON
 
 ### xqqyuv_player
-Simple demo for xqqyuv. It play YUV file which is outputed from vlc.
+- Simple demo for xqqyuv. It play YUV file which is outputed from vlc.
 
-Render: SDL
+- Render: SDL
 
-Usage: xqqyuv_player [FILE] [FRAMERATE]
+- Usage: xqqyuv_player [FILE] [FRAMERATE]
 
 ### License
 Copyright (C) 2014 zheng qian <xqq@0ginr.com>
