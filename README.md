@@ -1,6 +1,6 @@
 xqqyuv
 ======
-Simple YUV<->RGB conversion library with SIMD accelerated, still under developing and just for fun.
+Simple YUV-RGB conversion library with SIMD accelerated, still under developing and just for fun.
 
 For industry use, please consider [libyuv](https://code.google.com/p/libyuv/).
 
@@ -20,7 +20,7 @@ For industry use, please consider [libyuv](https://code.google.com/p/libyuv/).
 ### xqqyuv_player
 - Simple demo for xqqyuv. It can play YUV file which is outputed from vlc.
 
-- Render: SDL
+- Render: SDL v1.2
 
 - Usage: xqqyuv_player [FILE] [FRAMERATE]
 

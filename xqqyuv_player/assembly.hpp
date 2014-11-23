@@ -7,4 +7,7 @@
 #pragma comment (lib, "../Release/xqqyuv.lib")
 #endif
 
+#pragma comment (lib, "SDL.lib")
+#pragma comment (lib, "SDLmain.lib")
+
 #endif // _XQQYUV_PLAYER_ASSEMBLY_HPP

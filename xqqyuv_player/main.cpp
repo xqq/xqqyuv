@@ -1,5 +1,6 @@
 #include <cstdint>
 #include <cstdio>
+#include <cstdlib>
 #include <iostream>
 #include "assembly.hpp"
 #include "yuvplayer.hpp"
@@ -16,12 +17,12 @@ static int videoWidth = 0, videoHeight = 0;
 
 int initSDL(SDL_Surface** screen, int width, int height) {
     _putenv("SDL_VIDEO_WINDOW_POS=50,50");
-
+    
     if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
         std::cout << "Error while initializing SDL." << std::endl;
         return -1;
     }
-
+    
     SDL_Surface* _screen = SDL_SetVideoMode(width, height, 32, SDL_HWSURFACE);
     if (screen == nullptr) {
         std::cout << "Error while creating window." << std::endl;
@@ -73,7 +74,6 @@ int main(int argc, char* argv[]) {
 
     SDL_Surface* screen = nullptr;
     if (initSDL(&screen, videoWidth, videoHeight) == -1) {
-        std::cout << "Error: Create SDL Surface failed." << std::endl;
         return -1;
     }
 

@@ -1,25 +1,31 @@
 #include <cstdint>
-#include <fstream>
 #include <sstream>
-#include <string>
+#include <fstream>
 #include <queue>
+#include <string>
 #include <chrono>
 #include <thread>
+#include <memory>
+#include <stdexcept>
 #include <functional>
 #include "../xqqyuv/xqqyuv.h"
 #include "vlc_yuv_reader.hpp"
 #include "clock.hpp"
 #include "yuvplayer.hpp"
 
+#ifdef _MSC_VER     // MSVC
+#include <SDL.h>
+#else               // GCC
+#include <SDL/SDL.h>
+#endif
+
 using namespace xqqyuv;
 
 namespace xqqyuv_player {
 
-    YUVPlayer::YUVPlayer() { }
-
-    void YUVPlayer::Prepare(char* inputFileName, int frameRate) {
+    void YUVPlayer::Prepare(const char* inputFileName, int frameRate) {
         if (!inputFileName) {
-            throw std::exception("YUVPlayer::Prepare(): Null-Pointer in params");
+            throw std::invalid_argument("YUVPlayer::Prepare(): Null-Pointer in params");
         }
 
         inputFile.open(inputFileName, std::ios::in | std::ios::binary);
@@ -37,7 +43,7 @@ namespace xqqyuv_player {
 
     void YUVPlayer::AttachSDLSurface(SDL_Surface* screen) {
         if (!screen) {
-            throw std::exception("YUVPlayer::AttachSDLSurface(): Null-Pointer of SDL_Surface");
+            throw std::invalid_argument("YUVPlayer::AttachSDLSurface(): Null-Pointer of SDL_Surface");
         }
 
         this->screen = screen;
@@ -64,7 +70,7 @@ namespace xqqyuv_player {
         }
     }
 
-    void YUVPlayer::threadProc(void) {
+    void YUVPlayer::threadProc() {
         int width = yuvHeader.visibleWidth;
         int height = yuvHeader.visibleHeight;
 
@@ -96,7 +102,7 @@ namespace xqqyuv_player {
 
         do {
             totalClock.Begin();
-            handleMessage();
+            handleMessage(); 
 
             if (status == YUVPlayerStatus::PLAYING) {
                 SDL_LockSurface(screen);
@@ -108,7 +114,7 @@ namespace xqqyuv_player {
 
                 clock.Begin();
                 I420ToARGB_SSE2(src_y, width, src_u, width / 2, src_v, width / 2, 
-                                (ARGB*)screen->pixels, width, height, COLORSPACE_BT709);
+                                static_cast<ARGB*>(screen->pixels), width, height, COLORSPACE_BT709);
                 timeCalculate = clock.End().milliseconds;
 
                 clock.Begin();
@@ -154,7 +160,7 @@ namespace xqqyuv_player {
                 status = YUVPlayerStatus::STOPPED;
                 break;
             default:
-                throw std::exception("YUVPlayer: Unknown message\n");
+                throw std::invalid_argument("YUVPlayer: Unknown message\n");
             }
             messageQueue.pop();
         }
@@ -193,7 +199,7 @@ namespace xqqyuv_player {
         return yuvHeader.visibleHeight;
     }
 
-    int YUVPlayer::EventLoop(void) {
+    int YUVPlayer::EventLoop() {
         SDL_Event event;
         while (SDL_WaitEvent(&event)) {
             switch (event.type) {
@@ -211,7 +217,8 @@ namespace xqqyuv_player {
     YUVPlayer::~YUVPlayer() {
         if (status != NOP && inputFile.is_open()) {
             inputFile.close();
+            delete yuvReader;
         }
     }
 
-}
+} // namespace xqqyuv_player

@@ -19,7 +19,7 @@ namespace xqqyuv_player {
             input = next + 1;
         }
         fragments.push_back(std::string(input));
-        return fragments; // C++11¾ÍÊÇºÃ£¡
+        return fragments;
     }
 
     VlcYUVHeader VlcYUVReader::ParseHeader() {
@@ -34,7 +34,7 @@ namespace xqqyuv_player {
         // parse header string
         auto headerArray = SplitString(headerBuffer, ' ');
         
-        header.fourCC = *(uint32_t*)headerArray[0].c_str();
+        header.fourCC = *reinterpret_cast<const uint32_t*>(headerArray[0].c_str());
         header.visibleWidth = std::stoul(headerArray[1].substr(1, headerArray[1].length() - 1));
         header.visibleHeight = std::stoul(headerArray[2].substr(1, headerArray[2].length() - 1));
 
@@ -66,15 +66,15 @@ namespace xqqyuv_player {
             ParseHeader();
 
         if (bufferSize < frameSize)
-            throw std::exception("VlcYUVReader: buffer size not enough");
+            throw std::length_error("VlcYUVReader: buffer size not enough");
 
         if (inputFile->eof())
             return EOF;
 
         char strFRAME[16] = { 0 };
         inputFile->getline(strFRAME, 6, '\n');
-
-        inputFile->read((char*)buffer, frameSize);
+        
+        inputFile->read(reinterpret_cast<char*>(buffer), frameSize);
         return frameSize;
     }
 
@@ -82,4 +82,4 @@ namespace xqqyuv_player {
         inputFile->seekg(headerSize + index * frameSize, std::ios::beg);
     }
 
-}
+} // namespace xqqyuv_player

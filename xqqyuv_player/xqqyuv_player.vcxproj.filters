@@ -12,9 +12,6 @@
     <ClCompile Include="yuvplayer.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="clock.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

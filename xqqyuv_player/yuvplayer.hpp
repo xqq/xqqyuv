@@ -35,6 +35,26 @@ namespace xqqyuv_player {
     };
 
     class YUVPlayer {
+    public:
+        YUVPlayer() = default;
+        void Prepare(const char* inputFileName, int frameRate);
+        void AttachSDLSurface(SDL_Surface* screen);
+        void SetCallback(std::function<void(const char*)> logHandler,
+                         std::function<void(int, int, int)> showMSHandler);
+        void Start();
+        void Pause();
+        void Resume();
+        void Stop();
+        int GetWidth();
+        int GetHeight();
+        int EventLoop();
+        ~YUVPlayer();
+    private:
+        void log(const char* message);
+        void outMS(int timeCalculate, int timeDisplay, int fps);
+        void threadProc();
+        void handleMessage();
+        void postMessage(YUVPlayerMessage message);
     private:
         std::ifstream inputFile;
 
@@ -49,28 +69,8 @@ namespace xqqyuv_player {
         std::queue<YUVPlayerMessage> messageQueue;
         std::function<void(const char*)> printLog = nullptr;
         std::function<void(int, int, int)> showMS = nullptr;
-    private:
-        void log(const char* message);
-        void outMS(int timeCalculate, int timeDisplay, int fps);
-        void threadProc(void);
-        void handleMessage();
-        void postMessage(YUVPlayerMessage message);
-    public:
-        YUVPlayer();
-        void Prepare(char* inputFileName, int frameRate);
-        void AttachSDLSurface(SDL_Surface* screen);
-        void SetCallback(std::function<void(const char*)> logHandler,
-                         std::function<void(int, int, int)> showMSHandler);
-        void Start();
-        void Pause();
-        void Resume();
-        void Stop();
-        int GetWidth();
-        int GetHeight();
-        int EventLoop(void);
-        ~YUVPlayer();
     };
 
-}
+} // namespace xqqyuv_player
 
 #endif // _XQQYUV_PLAYER_YUVPLAYER_HPP

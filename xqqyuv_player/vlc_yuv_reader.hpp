@@ -31,21 +31,21 @@ namespace xqqyuv_player {
     };
 
     class VlcYUVReader {
+    public:
+        VlcYUVReader(std::ifstream& openedInputFile);
+        VlcYUVHeader ParseHeader();
+        int GetFrame(uint8_t* buffer, int bufferSize);
+        void VlcYUVReader::SeekFrame(int index);
+    private:
+        std::vector<std::string> SplitString(const char* config, char delimiter);
     private:
         std::ifstream* inputFile = nullptr;
         VlcYUVHeader header;
         bool headerParsed = false;
         int headerSize = 0;
         int frameSize = 0;
-    private:
-        std::vector<std::string> SplitString(const char* config, char delimiter);
-    public:
-        VlcYUVReader(std::ifstream& openedInputFile);
-        VlcYUVHeader ParseHeader();
-        int GetFrame(uint8_t* buffer, int bufferSize);
-        void VlcYUVReader::SeekFrame(int index);
     };
 
-}
+} // namespace xqqyuv_player
 
 #endif // _XQQYUV_PLAYER_VLC_YUV_READER_HPP
